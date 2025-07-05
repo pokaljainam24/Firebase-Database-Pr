@@ -25,6 +25,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (_, { rejectWi
     }
 })
 
+
 export const deleteUser = createAsyncThunk('user/deleteUser', async (id, { rejectWithValue }) => {
     try {
         let res = await axiosInstance.delete(`${id}/.json`);
