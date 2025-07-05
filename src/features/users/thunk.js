@@ -7,7 +7,7 @@ export const createUser = createAsyncThunk(
     async (user, { rejectWithValue }) => {
         try {
             const res = await axiosInstance.post(`/.json`, user);
-            return { ...user, id: res.data.name }; 
+            return { ...user, id: res.data.name };
         } catch (error) {
             console.log("Create User Error:", error);
             return rejectWithValue(error.message);
@@ -36,15 +36,18 @@ export const deleteUser = createAsyncThunk('user/deleteUser', async (id, { rejec
 
 export const editUser = createAsyncThunk('user/editUser', async (user, { rejectWithValue }) => {
     try {
-        console.log("thunk", user);
-
-        let obj = {
+        const updatedUser = {
+            name: user.name,
             email: user.email,
             password: user.password,
-        }
-        await axiosInstance.put(`${user.id}/.json`, obj);
+            phone: user.phone,
+            role: user.role,
+            status: !!user.status,
+        };
+
+        await axiosInstance.put(`${user.id}/.json`, updatedUser);
         return user;
     } catch (error) {
         return rejectWithValue(error.message);
     }
-})
+});

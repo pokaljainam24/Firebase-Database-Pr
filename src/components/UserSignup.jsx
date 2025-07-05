@@ -1,3 +1,4 @@
+// components/UserSignup.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, editUser, fetchUser } from "../features/users/thunk";
@@ -19,17 +20,28 @@ const UserSignup = ({ user, setUser, editId, setEditId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!user.name || !user.email || !user.password || !user.phone) {
+        const finalUser = {
+            name: user.name?.trim() || "",
+            email: user.email?.trim() || "",
+            password: user.password || "",
+            phone: user.phone?.trim() || "",
+            role: user.role || "User",
+            status: !!user.status,
+            id: editId || undefined,
+        };
+
+        // Validation
+        if (!finalUser.name || !finalUser.email || !finalUser.password || !finalUser.phone) {
             toast.error("Please fill all fields.");
             return;
         }
 
         if (editId !== null) {
-            await dispatch(editUser(user));
+            await dispatch(editUser(finalUser));
             toast.success("User updated successfully!");
             setEditId(null);
         } else {
-            await dispatch(createUser(user));
+            await dispatch(createUser(finalUser));
             toast.success("User created successfully!");
         }
 
