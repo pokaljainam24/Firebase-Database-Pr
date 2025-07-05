@@ -6,7 +6,7 @@ A fully responsive React-based Admin Dashboard for managing users with add/edit/
 
 ## 📸 Preview
 
-![Dashboard UI](./screenshots/dashboard.png)
+![Dashboard UI](https://github.com/user-attachments/assets/b078e57d-05c3-43f3-b357-fef35ae784b9)
 
 ---
 
